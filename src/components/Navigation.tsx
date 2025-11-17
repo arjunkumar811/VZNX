@@ -60,6 +60,16 @@ export default function Navigation() {
                 🏢 Clients
               </Link>
               <Link
+                to="/reports"
+                className={`${
+                  isActive('/reports')
+                    ? 'bg-indigo-600 text-white shadow-lg'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-indigo-600'
+                } inline-flex items-center px-6 py-2 rounded-lg text-lg font-semibold transition-all`}
+              >
+                📈 Reports
+              </Link>
+              <Link
                 to="/team"
                 className={`${
                   isActive('/team')

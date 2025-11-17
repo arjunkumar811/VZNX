@@ -6,6 +6,7 @@ import TeamOverview from './pages/TeamOverview';
 import ClientManagement from './pages/ClientManagement';
 import CalendarView from './pages/CalendarView';
 import GanttChart from './pages/GanttChart';
+import Reports from './pages/Reports';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/clients" element={<ClientManagement />} />
           <Route path="/calendar" element={<CalendarView />} />
           <Route path="/gantt" element={<GanttChart />} />
+          <Route path="/reports" element={<Reports />} />
           <Route path="/team" element={<TeamOverview />} />
         </Routes>
       </div>
