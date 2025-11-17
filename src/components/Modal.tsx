@@ -34,14 +34,14 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
           onClick={onClose}
         />
         
-        <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-10 animate-slide-up">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-4xl font-bold text-gray-900">{title}</h2>
+        <div className="relative bg-white rounded-lg shadow-xl max-w-lg w-full p-6 animate-slide-up">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold text-gray-900">{title}</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-2 rounded-xl transition-all"
+              className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-1.5 rounded-lg transition-all"
             >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
