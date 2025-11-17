@@ -4,6 +4,8 @@ import { useStore } from '../store';
 import TaskItem from '../components/TaskItem';
 import ProgressBar from '../components/ProgressBar';
 import Modal from '../components/Modal';
+import TimeTracker from '../components/TimeTracker';
+import BudgetSummary from '../components/BudgetSummary';
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -131,6 +133,8 @@ export default function ProjectDetail() {
         </select>
       </div>
 
+      <BudgetSummary projectId={project.id} />
+
       {filteredTasks.length === 0 ? (
         <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
           <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,6 +150,10 @@ export default function ProjectDetail() {
           ))}
         </div>
       )}
+
+      <div className="mt-8">
+        <TimeTracker projectId={project.id} />
+      </div>
 
       <Modal
         isOpen={isAddModalOpen}

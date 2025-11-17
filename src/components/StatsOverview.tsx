@@ -34,6 +34,20 @@ export default function StatsOverview() {
       color: 'from-purple-500 to-purple-600',
       bg: 'bg-purple-50'
     },
+    {
+      label: 'Total Revenue',
+      value: `$${(stats.totalRevenue / 1000).toFixed(1)}k`,
+      icon: '💰',
+      color: 'from-green-500 to-green-600',
+      bg: 'bg-green-50'
+    },
+    {
+      label: 'Total Hours',
+      value: `${stats.totalHours.toFixed(0)}h`,
+      icon: '⏱️',
+      color: 'from-amber-500 to-amber-600',
+      bg: 'bg-amber-50'
+    },
   ];
 
   const taskStats = [
@@ -64,7 +78,7 @@ export default function StatsOverview() {
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
         {statCards.map((stat) => (
           <div key={stat.label} className={`${stat.bg} rounded-lg p-3 border border-gray-100 hover:shadow-md transition-shadow`}>
             <div className="flex items-center justify-between">
