@@ -7,6 +7,7 @@ import StatsOverview from '../components/StatsOverview';
 
 export default function Dashboard() {
   const projects = useStore((state) => state.projects);
+  const clients = useStore((state) => state.clients);
   const addProject = useStore((state) => state.addProject);
   const updateProject = useStore((state) => state.updateProject);
   const deleteProject = useStore((state) => state.deleteProject);
@@ -16,10 +17,14 @@ export default function Dashboard() {
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectDesc, setNewProjectDesc] = useState('');
   const [newProjectDueDate, setNewProjectDueDate] = useState('');
+  const [newProjectClient, setNewProjectClient] = useState('');
+  const [newProjectBudget, setNewProjectBudget] = useState('');
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [editProjectName, setEditProjectName] = useState('');
   const [editProjectDesc, setEditProjectDesc] = useState('');
   const [editProjectDueDate, setEditProjectDueDate] = useState('');
+  const [editProjectClient, setEditProjectClient] = useState('');
+  const [editProjectBudget, setEditProjectBudget] = useState('');
   const [editProjectStatus, setEditProjectStatus] = useState<Project['status']>('Not Started');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<Project['status'] | 'All'>('All');
@@ -28,10 +33,18 @@ export default function Dashboard() {
   const handleAddProject = (e: React.FormEvent) => {
     e.preventDefault();
     if (newProjectName.trim()) {
-      addProject(newProjectName.trim(), newProjectDesc.trim() || undefined, newProjectDueDate || undefined);
+      addProject(
+        newProjectName.trim(),
+        newProjectDesc.trim() || undefined,
+        newProjectDueDate || undefined,
+        newProjectClient || undefined,
+        newProjectBudget ? parseFloat(newProjectBudget) : undefined
+      );
       setNewProjectName('');
       setNewProjectDesc('');
       setNewProjectDueDate('');
+      setNewProjectClient('');
+      setNewProjectBudget('');
       setIsAddModalOpen(false);
     }
   };
@@ -43,6 +56,8 @@ export default function Dashboard() {
         name: editProjectName.trim(),
         description: editProjectDesc.trim() || undefined,
         dueDate: editProjectDueDate || undefined,
+        clientId: editProjectClient || undefined,
+        budget: editProjectBudget ? parseFloat(editProjectBudget) : undefined,
         status: editProjectStatus,
       });
       setIsEditModalOpen(false);
@@ -55,6 +70,8 @@ export default function Dashboard() {
     setEditProjectName(project.name);
     setEditProjectDesc(project.description || '');
     setEditProjectDueDate(project.dueDate || '');
+    setEditProjectClient(project.clientId || '');
+    setEditProjectBudget(project.budget ? project.budget.toString() : '');
     setEditProjectStatus(project.status);
     setIsEditModalOpen(true);
   };
@@ -200,6 +217,39 @@ export default function Dashboard() {
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
             />
           </div>
+          <div className="mb-4">
+            <label htmlFor="project-client" className="block text-sm font-semibold text-gray-700 mb-2">
+              Client
+            </label>
+            <select
+              id="project-client"
+              value={newProjectClient}
+              onChange={(e) => setNewProjectClient(e.target.value)}
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+            >
+              <option value="">No client</option>
+              {clients.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {client.name} - {client.company}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="project-budget" className="block text-sm font-semibold text-gray-700 mb-2">
+              Budget ($)
+            </label>
+            <input
+              id="project-budget"
+              type="number"
+              step="100"
+              min="0"
+              value={newProjectBudget}
+              onChange={(e) => setNewProjectBudget(e.target.value)}
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+              placeholder="0"
+            />
+          </div>
           <div className="flex justify-end gap-3">
             <button
               type="button"
@@ -261,6 +311,39 @@ export default function Dashboard() {
               value={editProjectDueDate}
               onChange={(e) => setEditProjectDueDate(e.target.value)}
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="edit-project-client" className="block text-sm font-semibold text-gray-700 mb-2">
+              Client
+            </label>
+            <select
+              id="edit-project-client"
+              value={editProjectClient}
+              onChange={(e) => setEditProjectClient(e.target.value)}
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+            >
+              <option value="">No client</option>
+              {clients.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {client.name} - {client.company}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="edit-project-budget" className="block text-sm font-semibold text-gray-700 mb-2">
+              Budget ($)
+            </label>
+            <input
+              id="edit-project-budget"
+              type="number"
+              step="100"
+              min="0"
+              value={editProjectBudget}
+              onChange={(e) => setEditProjectBudget(e.target.value)}
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+              placeholder="0"
             />
           </div>
           <div className="mb-4">

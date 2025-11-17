@@ -17,6 +17,7 @@ export default function ProjectDetail() {
   const addTask = useStore((state) => state.addTask);
   const deleteTask = useStore((state) => state.deleteTask);
   const members = useStore((state) => state.members);
+  const clients = useStore((state) => state.clients);
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [newTaskName, setNewTaskName] = useState('');
@@ -80,6 +81,13 @@ export default function ProjectDetail() {
         <div className="flex justify-between items-start mb-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
+            {project.clientId && (
+              <div className="mt-2 text-sm text-gray-600">
+                Client: <span className="font-semibold text-indigo-600">
+                  {clients.find(c => c.id === project.clientId)?.company || 'Unknown'}
+                </span>
+              </div>
+            )}
             <span className={`inline-block mt-2 px-3 py-1 rounded-full text-sm font-medium ${
               project.status === 'Completed' ? 'bg-green-100 text-green-800' :
               project.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :

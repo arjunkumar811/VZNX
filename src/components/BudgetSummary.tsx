@@ -7,11 +7,14 @@ interface BudgetSummaryProps {
 
 export default function BudgetSummary({ projectId }: BudgetSummaryProps) {
   const project = useStore((state) => state.projects.find(p => p.id === projectId));
+  const clients = useStore((state) => state.clients);
   const getProjectCost = useStore((state) => state.getProjectCost);
   const getProjectHours = useStore((state) => state.getProjectHours);
   const tasks = useStore((state) => state.getProjectTasks(projectId));
   const timeEntries = useStore((state) => state.timeEntries);
   const members = useStore((state) => state.members);
+
+  const client = project?.clientId ? clients.find(c => c.id === project.clientId) : null;
 
   const projectTimeEntries = timeEntries.filter(te => 
     tasks.some(task => task.id === te.taskId)
@@ -37,7 +40,16 @@ export default function BudgetSummary({ projectId }: BudgetSummaryProps) {
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-      <h2 className="text-xl font-bold text-gray-900 mb-6">Budget & Cost Summary</h2>
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="text-xl font-bold text-gray-900">Budget & Cost Summary</h2>
+          {client && (
+            <p className="text-sm text-gray-600 mt-1">
+              Client: <span className="font-semibold">{client.name}</span> ({client.company})
+            </p>
+          )}
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
