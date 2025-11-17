@@ -4,6 +4,9 @@ import { Project } from '../types';
 import ProjectCard from '../components/ProjectCard';
 import Modal from '../components/Modal';
 import StatsOverview from '../components/StatsOverview';
+import ProjectAnalytics from '../components/ProjectAnalytics';
+import TeamPerformance from '../components/TeamPerformance';
+import ClientRevenue from '../components/ClientRevenue';
 
 export default function Dashboard() {
   const projects = useStore((state) => state.projects);
@@ -29,6 +32,7 @@ export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<Project['status'] | 'All'>('All');
   const [sortBy, setSortBy] = useState<'name' | 'progress'>('name');
+  const [showAnalytics, setShowAnalytics] = useState(false);
 
   const handleAddProject = (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,18 +110,43 @@ export default function Dashboard() {
             <h1 className="text-3xl font-bold text-gray-900 mb-1">Projects</h1>
             <p className="text-sm text-gray-600">{projects.length} total projects</p>
           </div>
-          <button
-            onClick={() => setIsAddModalOpen(true)}
-            className="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 shadow-lg hover:shadow-xl"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-            New Project
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setShowAnalytics(!showAnalytics)}
+              className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
+                showAnalytics
+                  ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  : 'bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-lg'
+              }`}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              {showAnalytics ? 'Hide Analytics' : 'Show Analytics'}
+            </button>
+            <button
+              onClick={() => setIsAddModalOpen(true)}
+              className="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 shadow-lg hover:shadow-xl"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              New Project
+            </button>
+          </div>
         </div>
 
         <StatsOverview />
+
+        {showAnalytics && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+            <ProjectAnalytics />
+            <TeamPerformance />
+            <div className="lg:col-span-2">
+              <ClientRevenue />
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-col sm:flex-row gap-3 mt-6">
           <div className="flex-1">
