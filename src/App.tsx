@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import ProjectDetail from './pages/ProjectDetail';
 import TeamOverview from './pages/TeamOverview';
 import ClientManagement from './pages/ClientManagement';
+import CalendarView from './pages/CalendarView';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="/clients" element={<ClientManagement />} />
+          <Route path="/calendar" element={<CalendarView />} />
           <Route path="/team" element={<TeamOverview />} />
         </Routes>
       </div>
