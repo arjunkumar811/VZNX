@@ -29,7 +29,7 @@ export default function TeamOverview() {
   const handleEditMember = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingMember && editMemberName.trim()) {
-      updateMember(editingMember.id, editMemberName.trim());
+      updateMember(editingMember.id, { name: editMemberName.trim() });
       setIsEditModalOpen(false);
       setEditingMember(null);
     }

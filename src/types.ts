@@ -22,6 +22,8 @@ export type Project = {
   description?: string;
   dueDate?: string;
   createdAt: string;
+  clientId?: ID;
+  budget?: number;
 };
 
 export type Member = {
@@ -29,6 +31,29 @@ export type Member = {
   name: string;
   email?: string;
   avatar?: string;
+  hourlyRate?: number;
+  role?: string;
+};
+
+export type Client = {
+  id: ID;
+  name: string;
+  email: string;
+  company: string;
+  phone?: string;
+  address?: string;
+  createdAt: string;
+};
+
+export type TimeEntry = {
+  id: ID;
+  taskId: ID;
+  memberId: ID;
+  hours: number;
+  date: string;
+  description?: string;
+  billable: boolean;
+  createdAt: string;
 };
 
 export interface ProjectStats {
@@ -39,4 +64,7 @@ export interface ProjectStats {
   completedTasks: number;
   overdueTasks: number;
   avgProgress: number;
+  totalRevenue: number;
+  totalHours: number;
+  utilizationRate: number;
 }
