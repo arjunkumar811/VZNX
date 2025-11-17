@@ -5,6 +5,7 @@ import ProjectDetail from './pages/ProjectDetail';
 import TeamOverview from './pages/TeamOverview';
 import ClientManagement from './pages/ClientManagement';
 import CalendarView from './pages/CalendarView';
+import GanttChart from './pages/GanttChart';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="/clients" element={<ClientManagement />} />
           <Route path="/calendar" element={<CalendarView />} />
+          <Route path="/gantt" element={<GanttChart />} />
           <Route path="/team" element={<TeamOverview />} />
         </Routes>
       </div>
