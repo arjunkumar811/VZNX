@@ -7,6 +7,10 @@ import StatsOverview from '../components/StatsOverview';
 import ProjectAnalytics from '../components/ProjectAnalytics';
 import TeamPerformance from '../components/TeamPerformance';
 import ClientRevenue from '../components/ClientRevenue';
+import RevenueChart from '../components/RevenueChart';
+import BudgetDistributionChart from '../components/BudgetDistributionChart';
+import ProjectStatusChart from '../components/ProjectStatusChart';
+import TeamWorkloadChart from '../components/TeamWorkloadChart';
 
 export default function Dashboard() {
   const projects = useStore((state) => state.projects);
@@ -139,13 +143,21 @@ export default function Dashboard() {
         <StatsOverview />
 
         {showAnalytics && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-            <ProjectAnalytics />
-            <TeamPerformance />
-            <div className="lg:col-span-2">
-              <ClientRevenue />
+          <>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+              <RevenueChart />
+              <BudgetDistributionChart />
+              <ProjectStatusChart />
+              <TeamWorkloadChart />
             </div>
-          </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+              <ProjectAnalytics />
+              <TeamPerformance />
+              <div className="lg:col-span-2">
+                <ClientRevenue />
+              </div>
+            </div>
+          </>
         )}
 
         <div className="flex flex-col sm:flex-row gap-3 mt-6">

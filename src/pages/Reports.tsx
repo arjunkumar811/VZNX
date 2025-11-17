@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { useStore } from '../store';
+import RevenueChart from '../components/RevenueChart';
+import BudgetDistributionChart from '../components/BudgetDistributionChart';
+import ProjectStatusChart from '../components/ProjectStatusChart';
+import TeamWorkloadChart from '../components/TeamWorkloadChart';
 
 type ReportType = 'project-summary' | 'time-tracking' | 'budget-analysis' | 'client-revenue';
 type DateRange = 'week' | 'month' | 'quarter' | 'year' | 'all' | 'custom';
@@ -639,6 +643,13 @@ export default function Reports() {
           {reportType === 'time-tracking' && renderTimeTracking()}
           {reportType === 'budget-analysis' && renderBudgetAnalysis()}
           {reportType === 'client-revenue' && renderClientRevenue()}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <RevenueChart />
+          <BudgetDistributionChart />
+          <ProjectStatusChart />
+          <TeamWorkloadChart />
         </div>
       </div>
     </div>
