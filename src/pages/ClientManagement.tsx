@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useStore } from '../store';
 import { Client } from '../types';
 import ClientCard from '../components/ClientCard';
@@ -61,6 +62,7 @@ export default function ClientManagement() {
           phone: formData.phone.trim() || undefined,
           address: formData.address.trim() || undefined,
         });
+        toast.success(`Client "${formData.name.trim()}" updated successfully!`);
       } else {
         addClient(
           formData.name.trim(),
@@ -69,6 +71,7 @@ export default function ClientManagement() {
           formData.phone.trim() || undefined,
           formData.address.trim() || undefined
         );
+        toast.success(`Client "${formData.name.trim()}" created successfully!`);
       }
       setIsModalOpen(false);
       resetForm();
@@ -76,6 +79,7 @@ export default function ClientManagement() {
   };
 
   const handleDelete = (id: string) => {
+    const client = clients.find(c => c.id === id);
     const clientProjects = getClientProjects(id);
     const confirmMsg = clientProjects.length > 0
       ? `This client has ${clientProjects.length} project(s). Delete anyway?`
@@ -83,6 +87,7 @@ export default function ClientManagement() {
     
     if (confirm(confirmMsg)) {
       deleteClient(id);
+      toast.success(`Client "${client?.name}" deleted successfully!`);
     }
   };
 

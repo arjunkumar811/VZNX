@@ -27,14 +27,14 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+    <div className="fixed inset-0 z-50 overflow-y-auto animate-fadeIn">
       <div className="flex min-h-screen items-center justify-center px-4">
         <div
           className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm transition-opacity"
           onClick={onClose}
         />
         
-        <div className="relative bg-white rounded-lg shadow-xl max-w-lg w-full p-6 animate-slide-up">
+        <div className="relative bg-white rounded-lg shadow-xl max-w-lg w-full p-6 animate-scaleIn">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-gray-900">{title}</h2>
             <button

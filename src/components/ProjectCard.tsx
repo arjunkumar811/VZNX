@@ -36,7 +36,7 @@ export default function ProjectCard({ project, onEdit, onDelete }: ProjectCardPr
   const daysUntilDue = getDaysUntilDue();
 
   return (
-    <div className="bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 p-4 animate-fade-in hover:scale-[1.01]">
+    <div className="bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 p-4 animate-slideUp hover:scale-[1.02]">
       <div className="flex justify-between items-start mb-4">
         <Link to={`/project/${project.id}`} className="flex-1">
           <h3 className="text-lg font-bold text-gray-900 hover:text-indigo-600 transition-colors">

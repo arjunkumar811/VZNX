@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Navigation from './components/Navigation';
 import Dashboard from './pages/Dashboard';
 import ProjectDetail from './pages/ProjectDetail';
@@ -13,6 +14,31 @@ function App() {
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50">
         <Navigation />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: '#fff',
+              color: '#363636',
+              border: '1px solid #e5e7eb',
+              borderRadius: '0.5rem',
+              fontSize: '14px',
+            },
+            success: {
+              iconTheme: {
+                primary: '#10b981',
+                secondary: '#fff',
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: '#ef4444',
+                secondary: '#fff',
+              },
+            },
+          }}
+        />
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/project/:id" element={<ProjectDetail />} />

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useStore } from '../store';
 import { Project } from '../types';
 import ProjectCard from '../components/ProjectCard';
@@ -48,6 +49,7 @@ export default function Dashboard() {
         newProjectClient || undefined,
         newProjectBudget ? parseFloat(newProjectBudget) : undefined
       );
+      toast.success(`Project "${newProjectName.trim()}" created successfully!`);
       setNewProjectName('');
       setNewProjectDesc('');
       setNewProjectDueDate('');
@@ -68,6 +70,7 @@ export default function Dashboard() {
         budget: editProjectBudget ? parseFloat(editProjectBudget) : undefined,
         status: editProjectStatus,
       });
+      toast.success(`Project "${editProjectName.trim()}" updated successfully!`);
       setIsEditModalOpen(false);
       setEditingProject(null);
     }
@@ -86,7 +89,9 @@ export default function Dashboard() {
 
   const handleDeleteProject = (id: string) => {
     if (confirm('Are you sure you want to delete this project? All tasks will be lost.')) {
+      const project = projects.find(p => p.id === id);
       deleteProject(id);
+      toast.success(`Project "${project?.name}" deleted successfully!`);
     }
   };
 

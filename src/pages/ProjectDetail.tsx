@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { useStore } from '../store';
 import TaskItem from '../components/TaskItem';
 import ProgressBar from '../components/ProgressBar';
@@ -45,6 +46,7 @@ export default function ProjectDetail() {
     e.preventDefault();
     if (newTaskName.trim()) {
       addTask(project.id, newTaskName.trim(), selectedAssignee || undefined);
+      toast.success(`Task "${newTaskName.trim()}" added successfully!`);
       setNewTaskName('');
       setSelectedAssignee('');
       setIsAddModalOpen(false);
@@ -53,7 +55,9 @@ export default function ProjectDetail() {
 
   const handleDeleteTask = (taskId: string) => {
     if (confirm('Are you sure you want to delete this task?')) {
+      const task = tasks.find(t => t.id === taskId);
       deleteTask(taskId);
+      toast.success(`Task "${task?.name}" deleted successfully!`);
     }
   };
 

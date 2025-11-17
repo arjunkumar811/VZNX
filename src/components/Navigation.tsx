@@ -8,17 +8,17 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="bg-white shadow-md border-b border-gray-200">
+    <nav className="bg-white shadow-md border-b border-gray-200 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
-                <span className="text-white text-lg font-bold">V</span>
+                <span className="text-white text-lg font-bold" aria-label="VZNX">V</span>
               </div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">VZNX Manager</h1>
             </div>
-            <div className="hidden sm:ml-12 sm:flex sm:space-x-4">
+            <div className="hidden sm:ml-12 sm:flex sm:space-x-4" role="navigation" aria-label="Main navigation">
               <Link
                 to="/"
                 className={`${
